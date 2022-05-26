@@ -33,14 +33,13 @@ class FurnitureDetailViewController: UIViewController,UINavigationControllerDele
         } else {
             photoImageView.image = nil
         }
-        
         furnitureTitleLabel.text = furniture.name
         furnitureDescriptionLabel.text = furniture.description
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else {return}
-//        photoImageView.image = selectedImage
+
         let imageDataCompressed = selectedImage.jpegData(compressionQuality: 0.9)
         furniture?.imageData = imageDataCompressed
         dismiss(animated: true, completion: nil)
@@ -79,8 +78,11 @@ class FurnitureDetailViewController: UIViewController,UINavigationControllerDele
         present(alertController, animated: true, completion: nil)
     }
 
-    @IBAction func actionButtonTapped(_ sender: Any) {
-        
+    @IBAction func actionButtonTapped(_ sender: UIButton) {
+        guard let image = photoImageView.image, let description = furnitureDescriptionLabel.text else {return}
+        let activityController = UIActivityViewController(activityItems: [image, description], applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = sender
+        present(activityController, animated: true, completion: nil)
     }
     
 }
