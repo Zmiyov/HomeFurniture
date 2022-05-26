@@ -38,8 +38,19 @@ class FurnitureDetailViewController: UIViewController {
         furnitureDescriptionLabel.text = furniture.description
     }
     
-    @IBAction func choosePhotoButtonTapped(_ sender: Any) {
+    @IBAction func choosePhotoButtonTapped(_ sender: UIButton) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: <#T##((UIAlertAction) -> Void)?##((UIAlertAction) -> Void)?##(UIAlertAction) -> Void#>)
+        let photoLibraryAction = UIAlertAction(title: "Photo Libraty", style: .default, handler: <#T##((UIAlertAction) -> Void)?##((UIAlertAction) -> Void)?##(UIAlertAction) -> Void#>)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(cameraAction)
+        alertController.addAction(photoLibraryAction)
+        alertController.popoverPresentationController?.sourceView = sender
+        
+        present(alertController, animated: true, completion: nil)
     }
 
     @IBAction func actionButtonTapped(_ sender: Any) {
